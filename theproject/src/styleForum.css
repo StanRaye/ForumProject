@@ -1,0 +1,252 @@
+@font-face {
+    font-family: 'Tahoma';
+    src: url('C:/Users/stanl/Desktop/Development/Web Development/Healthy Living Project/Tahoma Regular font.ttf') format('truetype');
+}
+
+
+body {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    background-color: #000000;
+    color: #009b22;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.popup {
+    position: absolute;
+    border: solid #009b22 1px;
+    background-color: #000000;
+    padding: 10px;
+    z-index: 9999;
+}
+
+
+/* Thread Content */
+.thread {
+    border: solid #009b22 2px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #000000;
+}
+
+.thread--content {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    border: solid #009b22 2px;
+    padding: 15px;
+    margin: 20px;
+    background-color: #000000;
+}
+
+.reply--content {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    border: solid #009b22 2px;
+    padding: 15px;
+    margin: 5px;
+    background-color: #000000;
+}
+
+.thread--replies {
+    margin: 20px;
+    background-color: #000000;
+}
+
+.sub2 {
+    overflow:hidden;
+}
+
+h1 {
+    margin: 20px 0;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 48px;
+}
+
+h1 span {
+    display: inline-block;
+    padding: 5px;
+    background: linear-gradient(to right, #d4af37, #ffd700);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    border: 3px solid #d9d9d9;
+    /* Light gray border for metal effect */
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    text-shadow:
+        1px 1px 0px rgba(255, 255, 255, 0.8),
+        /* Top-left highlight */
+        2px 2px 0px rgba(0, 0, 0, 0.4);
+    /* Bottom-right shadow */
+}
+
+h1 span+span {
+    margin-left: 10px;
+}
+/**/
+
+/* Input for replies and posts */
+button {
+    background-color: #000000;
+    border: solid #009b22 1px;
+    font-family: 'Courier New', monospace;
+    color: #009b22;
+    margin: 5px;
+    cursor: pointer;
+    height: 30px;
+    width: 100px;
+    font-family: 'Courier New', monospace;
+    /* Use the Tahoma font */
+}
+
+input {
+    background-color: #000000;
+    border: solid #009b22 1px;
+    color: #009b22;
+    margin: 5px;
+    margin-left: auto;
+    font-family: 'Courier New', monospace;
+    /* Use the Tahoma font */
+}
+
+/*
+input[type='file'] {
+    display: none;
+}*/
+
+
+
+/* Designing the popup to post or reply */
+.forum--postbar {
+    border: solid #009b22 1px;
+    height: 325px;
+    width: 80%;
+    max-width: 500px;
+    /* Limit the max width to ensure it doesn't cover the entire screen */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    background-color: #000000;
+    padding: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+}
+
+
+.thread-posting {
+    display: grid;
+    grid-template: 25% 75% 25% 50% / 100%;
+    gap: 10px;
+}
+
+.thread-posting>* {
+    margin-left: 2%;
+}
+
+textarea {
+    background-color: #000000;
+    resize: none;
+    color: #009b22;
+    width: 95%;
+    height: 100%;
+    font-family: 'Courier New', monospace;
+    /* Use the Tahoma font */
+}
+
+::placeholder {
+    font-family: 'Courier New', monospace;
+    color: #009b22;
+}
+
+.imageUpload--button {
+    padding: 0px;
+    margin: 5px;
+    margin-left: auto;
+    cursor: pointer;
+    background-color: #000000;
+    margin-top: 10px;
+} 
+
+.post--button {
+    font-family: 'Courier New', monospace;
+    /* Use the Tahoma font */
+    font-size: 10px;
+    /* Adjust the font size for the pixelated effect */
+    background-color: #000000;
+    color: #009b22;
+    width: 80px;
+    height: 50%;
+    cursor: pointer;
+}
+
+.newPost--button {
+    background-color: #000000;
+    border: solid #009b22 2px;
+    color: #009b22;
+    margin: 5px;
+    cursor: pointer;
+    height: 80px;
+    width: 80px;
+    font-family: 'Courier New', monospace;
+    /* Use the Tahoma font */
+}
+
+.exit--button {
+    background-color: #000000;
+    width: 80px;
+    cursor: pointer;
+    color: #009b22;
+    font-family: 'Courier New', monospace;
+    /* Use the Tahoma font */
+    margin-left: 80%;
+}
+
+
+.image-container {
+    position: relative;
+    overflow: hidden;
+    max-width: 700px;
+    max-height: 700px;
+}
+
+.image {
+    max-width: 100%;
+    height: auto;
+    cursor: pointer;
+   
+    position: relative;
+}
+
+.preview {
+    /* Styles for the preview version */
+    width: 200px;
+    height: auto;
+    position: elative;
+}
+
+.full-size {
+    /* Styles for the full-size version */
+    max-width: 700px;
+    max-height: 700px;
+    width: auto;
+    height: auto;
+    position: relative;
+}
+
+.placeholder {
+    height: 700px;
+}
+
+a {
+    color: #009b22;
+}
+
+a:visited {
+    color: #009b22;
+}
