@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/ForumProject/static/css/main.f2a60fb8.css",
-    "main.js": "/ForumProject/static/js/main.9b1e854e.js",
+    "main.js": "/ForumProject/static/js/main.0d2ebf58.js",
     "index.html": "/ForumProject/index.html",
     "main.f2a60fb8.css.map": "/ForumProject/static/css/main.f2a60fb8.css.map",
-    "main.9b1e854e.js.map": "/ForumProject/static/js/main.9b1e854e.js.map"
+    "main.0d2ebf58.js.map": "/ForumProject/static/js/main.0d2ebf58.js.map"
   },
   "entrypoints": [
     "static/css/main.f2a60fb8.css",
-    "static/js/main.9b1e854e.js"
+    "static/js/main.0d2ebf58.js"
   ]
 }
