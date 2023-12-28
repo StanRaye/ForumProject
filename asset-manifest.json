@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ForumProject/static/css/main.f2a60fb8.css",
+    "main.js": "/ForumProject/static/js/main.8c7caf6f.js",
+    "index.html": "/ForumProject/index.html",
+    "main.f2a60fb8.css.map": "/ForumProject/static/css/main.f2a60fb8.css.map",
+    "main.8c7caf6f.js.map": "/ForumProject/static/js/main.8c7caf6f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f2a60fb8.css",
+    "static/js/main.8c7caf6f.js"
+  ]
+}
