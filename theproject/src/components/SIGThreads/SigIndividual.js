@@ -49,6 +49,13 @@ export default function SigIndividual(props) {
       .then((json) => json.json())
       .then((data) => {
         setReplies(Object.values(data)[0]); //setting information found in the replies
+      })
+      .then((response) => {
+        // Handle successful response here
+      })
+      .catch((error) => {
+        // Handle error here
+        console.error("Fetch error:", error);
       });
     console.log(data);
   }
@@ -80,7 +87,14 @@ export default function SigIndividual(props) {
     fetch(
       "https://forum-backend123-ec047248a0ce.herokuapp.com/forum/sig/threadreply",
       requestOptions
-    ); //performing the post
+    )
+      .then((response) => {
+        // Handle successful response here
+      })
+      .catch((error) => {
+        // Handle error here
+        console.error("Fetch error:", error);
+      }); //performing the post
   }
 
   //adding the id reference to the content box

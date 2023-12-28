@@ -42,6 +42,13 @@ export default function Sig() {
       .then((json) => json.json())
       .then((data) => {
         setData(data);
+      })
+      .then((response) => {
+        // Handle successful response here
+      })
+      .catch((error) => {
+        // Handle error here
+        console.error("Fetch error:", error);
       });
     console.log(data);
   }
