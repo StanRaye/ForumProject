@@ -43,7 +43,9 @@ export default function SigIndividual(props) {
       };
 
     const queryString = new URLSearchParams(id).toString(); //query strucutre in URL is needed in order to pass on our threads ID
-    fetch(`/forum/sig/thread/?${queryString}`)
+    fetch(
+      `https://forum-backend123-ec047248a0ce.herokuapp.com/forum/sig/thread/?${queryString}`
+    )
       .then((json) => json.json())
       .then((data) => {
         setReplies(Object.values(data)[0]); //setting information found in the replies
@@ -75,7 +77,10 @@ export default function SigIndividual(props) {
         body: formData,
       };
     }
-    fetch("/forum/sig/threadreply", requestOptions); //performing the post
+    fetch(
+      "https://forum-backend123-ec047248a0ce.herokuapp.com/forum/sig/threadreply",
+      requestOptions
+    ); //performing the post
   }
 
   //adding the id reference to the content box

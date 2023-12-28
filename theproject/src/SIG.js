@@ -38,7 +38,7 @@ export default function Sig() {
   });
 
   function consoleLog() {
-    fetch("/forum/sig/get")
+    fetch("https://forum-backend123-ec047248a0ce.herokuapp.com/forum/sig/get")
       .then((json) => json.json())
       .then((data) => {
         setData(data);
@@ -69,7 +69,10 @@ export default function Sig() {
       };
     }
 
-    fetch("/forum/sig/post", requestOptions); //performing the post
+    fetch(
+      "https://forum-backend123-ec047248a0ce.herokuapp.com/forum/sig/post",
+      requestOptions
+    ); //performing the post
     console.log("should be posted");
 
     setShowPostBar(false);
