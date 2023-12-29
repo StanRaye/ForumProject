@@ -1,9 +1,9 @@
 {
   "name": "theproject",
-  "homepage": "http://StanRaye.github.io/ForumProject",
+  "homepage": "http://StanRaye.github.io/ForumProject", 
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001",
+  "proxy": "https://forum-project-86d68c9b2875.herokuapp.com",
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "@testing-library/jest-dom": "^5.16.5",

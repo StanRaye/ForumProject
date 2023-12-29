@@ -16,6 +16,21 @@ body {
     z-index: 9999;
 }
 
+#ErrorPopup {
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    z-index: 9999;
+    color: red;
+    background-color: #000000;
+    border: solid red 1px;
+    padding: 10px;
+}
+
+#removePopup {
+    visibility: hidden;
+}
+
 
 /* Thread Content */
 .thread {
@@ -113,7 +128,9 @@ input[type='file'] {
     display: none;
 }*/
 
-
+.sigTitle {
+    font-family: 'Courier New', monospace;
+}
 
 /* Designing the popup to post or reply */
 .forum--postbar {

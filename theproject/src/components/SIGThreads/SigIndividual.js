@@ -1,5 +1,6 @@
 import React from "react";
 import SigReply from "./SigReply.js";
+import ErrorPopup from "./ErrorPopup.js";
 import { StyleSheet, css } from "aphrodite";
 import { fadeIn } from "react-animations";
 
@@ -16,6 +17,8 @@ export default function SigIndividual(props) {
   const [showPostBar, setShowPostBar] = React.useState(false);
   const [imageClicked, setImageClicked] = React.useState(false);
   const [showReplies, setShowReplies] = React.useState(false);
+  let [allowSubmit, setAllowSubmit] = React.useState("");
+  let [error, setError] = React.useState(false);
 
   let specialBool = false;
   const maxContentLength = 2000;
@@ -43,9 +46,7 @@ export default function SigIndividual(props) {
       };
 
     const queryString = new URLSearchParams(id).toString(); //query strucutre in URL is needed in order to pass on our threads ID
-    fetch(
-      `https://forum-backend123-ec047248a0ce.herokuapp.com/forum/sig/thread/?${queryString}`
-    )
+    fetch(`/forum/sig/thread/?${queryString}`, { mode: "no-cors" })
       .then((json) => json.json())
       .then((data) => {
         setReplies(Object.values(data)[0]); //setting information found in the replies
@@ -60,8 +61,16 @@ export default function SigIndividual(props) {
     console.log(data);
   }
 
+  function isEmptyOrSpaces(str) {
+    return !str || str.trim() === "";
+  }
+
   //function for making a reply
   function postReply(event) {
+    setAllowSubmit("true");
+    setTimeout(() => {
+      setAllowSubmit("");
+    }, 5500);
     event.preventDefault();
     const publicIp = require("react-public-ip");
     const ipv4 = publicIp.v4() || "";
@@ -69,6 +78,19 @@ export default function SigIndividual(props) {
     formData.append("threadID", props.ID);
     formData.append("replyingToRef", text);
     formData.append("ip", ipv4);
+
+    if (
+      isEmptyOrSpaces(formData.get("content")) ||
+      isEmptyOrSpaces(formData.get("title"))
+    ) {
+      setError(<ErrorPopup />);
+
+      setTimeout(() => {
+        setError(null);
+      }, 5500);
+      return;
+    }
+
     let requestOptions = {};
     if (formData.get("image")) {
       console.log("Image Found");
@@ -84,10 +106,7 @@ export default function SigIndividual(props) {
         body: formData,
       };
     }
-    fetch(
-      "https://forum-backend123-ec047248a0ce.herokuapp.com/forum/sig/threadreply",
-      requestOptions
-    )
+    fetch("/forum/sig/threadreply", requestOptions, { mode: "no-cors" })
       .then((response) => {
         // Handle successful response here
       })
@@ -95,6 +114,7 @@ export default function SigIndividual(props) {
         // Handle error here
         console.error("Fetch error:", error);
       }); //performing the post
+    window.location.reload();
   }
 
   //adding the id reference to the content box
@@ -157,6 +177,7 @@ export default function SigIndividual(props) {
       popupPosition={popupPosition}
     />
   ));
+  const repliesLength = replies.length;
   let repliesTextReference = props.replyRef;
   repliesTextReference = repliesTextReference.map((text) => (
     <a
@@ -283,7 +304,7 @@ export default function SigIndividual(props) {
                   type="submit"
                   value="Post"
                   className="post--button"
-                  onClick={togglePostBar}
+                  disabled={allowSubmit}
                 ></input>
               </div>
             </form>
@@ -292,7 +313,13 @@ export default function SigIndividual(props) {
       )}
 
       {/* Conditionally render replies */}
-      {showReplies ? <div className="thread--replies">{replies}</div> : null}
+      {showReplies ? (
+        repliesLength != 0 ? (
+          <div className="thread--replies">{replies}</div>
+        ) : (
+          <p>No Replies...</p>
+        )
+      ) : null}
 
       <div
         className="popup"
@@ -302,6 +329,7 @@ export default function SigIndividual(props) {
         }}
         dangerouslySetInnerHTML={{ __html: popup }}
       ></div>
+      <div>{error}</div>
     </div>
   );
 }

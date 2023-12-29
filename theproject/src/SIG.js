@@ -5,12 +5,15 @@ import { fadeInUp } from "react-animations";
 import { fadeInLeft } from "react-animations";
 import { StyleSheet, css } from "aphrodite";
 import { fadeIn } from "react-animations";
+import ErrorPopup from "./components/SIGThreads/ErrorPopup.js";
 
 export default function Sig() {
   //state variable to store threads already posted
   const [data, setData] = React.useState([]);
   const [showPostBar, setShowPostBar] = React.useState(false);
+  let [error, setError] = React.useState(false);
   let [title, setTitle] = React.useState("");
+  let [allowSubmit, setAllowSubmit] = React.useState("");
 
   useEffect(() => {
     consoleLog();
@@ -38,7 +41,9 @@ export default function Sig() {
   });
 
   function consoleLog() {
-    fetch("https://forum-backend123-ec047248a0ce.herokuapp.com/forum/sig/get")
+    fetch("/forum/sig/get", {
+      mode: "no-cors",
+    })
       .then((json) => json.json())
       .then((data) => {
         setData(data);
@@ -53,12 +58,32 @@ export default function Sig() {
     console.log(data);
   }
   //function for posting a new thread
+  function isEmptyOrSpaces(str) {
+    return !str || str.trim() === "";
+  }
+
   function postThread(event) {
+    setAllowSubmit("true");
+    setTimeout(() => {
+      setAllowSubmit("");
+    }, 5500);
     event.preventDefault();
     const publicIp = require("react-public-ip");
     const ipv4 = publicIp.v4() || "";
     const formData = new FormData(event.target);
     formData.append("ip", ipv4);
+
+    if (
+      isEmptyOrSpaces(formData.get("content")) ||
+      isEmptyOrSpaces(formData.get("title"))
+    ) {
+      setError(<ErrorPopup />);
+
+      setTimeout(() => {
+        setError(null);
+      }, 5500);
+      return;
+    }
 
     let requestOptions = {};
     if (formData.get("image")) {
@@ -76,13 +101,10 @@ export default function Sig() {
       };
     }
 
-    fetch(
-      "https://forum-backend123-ec047248a0ce.herokuapp.com/forum/sig/post",
-      requestOptions
-    ); //performing the post
+    fetch("/forum/sig/post", requestOptions, { mode: "no-cors" }); //performing the post
     console.log("should be posted");
 
-    setShowPostBar(false);
+    window.location.reload();
   }
 
   //making an array of indivdual threads so that I can view them
@@ -111,7 +133,12 @@ export default function Sig() {
 
     const interval = setInterval(() => {
       if (i < typeWriterText.length) {
-        outputText = typeWriterText.slice(0, i + 1);
+        if (i == typeWriterText.length - 1) {
+          outputText = typeWriterText.slice(0, i + 1);
+        } else {
+          outputText = typeWriterText.slice(0, i + 1) + "|";
+        }
+
         setTitle(outputText);
         i++;
       } else {
@@ -139,12 +166,7 @@ export default function Sig() {
               Exit
             </button>
             {/* Form object */}
-            <form
-              className="thread-posting"
-              onSubmit={postThread}
-              action="/"
-              method="POST"
-            >
+            <form className="thread-posting" onSubmit={postThread}>
               <div className="usernametitle">
                 <input
                   type="text"
@@ -171,7 +193,7 @@ export default function Sig() {
                   type="submit"
                   className="post--button"
                   value="Post"
-                  onClick={togglePostBar}
+                  disabled={allowSubmit}
                 ></input>
               </div>
             </form>
@@ -184,6 +206,7 @@ export default function Sig() {
         <div className={css(styles.anim)}>{threads}</div>
       </div>
       <div className="placeholder"></div>
+      <div>{error}</div>
     </div>
   );
 }
