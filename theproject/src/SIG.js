@@ -41,9 +41,7 @@ export default function Sig() {
   });
 
   function consoleLog() {
-    fetch("https://forum-project-86d68c9b2875.herokuapp.com/forum/sig/get", {
-      mode: "no-cors",
-    })
+    fetch("https://forum-project-86d68c9b2875.herokuapp.com/forum/sig/get")
       .then((json) => json.json())
       .then((data) => {
         setData(data);
@@ -103,8 +101,7 @@ export default function Sig() {
 
     fetch(
       "https://forum-project-86d68c9b2875.herokuapp.com/forum/sig/post",
-      requestOptions,
-      { mode: "no-cors" }
+      requestOptions
     ); //performing the post
     console.log("should be posted");
 
