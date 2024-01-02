@@ -41,7 +41,7 @@ export default function Sig() {
   });
 
   function consoleLog() {
-    fetch("/forum/sig/get", {
+    fetch("https://forum-project-86d68c9b2875.herokuapp.com/forum/sig/get", {
       mode: "no-cors",
     })
       .then((json) => json.json())
@@ -101,7 +101,11 @@ export default function Sig() {
       };
     }
 
-    fetch("/forum/sig/post", requestOptions, { mode: "no-cors" }); //performing the post
+    fetch(
+      "https://forum-project-86d68c9b2875.herokuapp.com/forum/sig/post",
+      requestOptions,
+      { mode: "no-cors" }
+    ); //performing the post
     console.log("should be posted");
 
     window.location.reload();

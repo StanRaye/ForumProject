@@ -46,7 +46,10 @@ export default function SigIndividual(props) {
       };
 
     const queryString = new URLSearchParams(id).toString(); //query strucutre in URL is needed in order to pass on our threads ID
-    fetch(`/forum/sig/thread/?${queryString}`, { mode: "no-cors" })
+    fetch(
+      `https://forum-project-86d68c9b2875.herokuapp.com/forum/sig/thread/?${queryString}`,
+      { mode: "no-cors" }
+    )
       .then((json) => json.json())
       .then((data) => {
         setReplies(Object.values(data)[0]); //setting information found in the replies
@@ -106,7 +109,11 @@ export default function SigIndividual(props) {
         body: formData,
       };
     }
-    fetch("/forum/sig/threadreply", requestOptions, { mode: "no-cors" })
+    fetch(
+      "https://forum-project-86d68c9b2875.herokuapp.com/forum/sig/threadreply",
+      requestOptions,
+      { mode: "no-cors" }
+    )
       .then((response) => {
         // Handle successful response here
       })
